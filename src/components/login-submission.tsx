@@ -38,7 +38,6 @@ function formSubmissionReducer(state: FormState, action: Action): FormState {
       const _exhaustiveCheck: never = action
       throw new Error(`Unsupported type: ${_exhaustiveCheck}`)
     }
-
   }
 }
 
@@ -108,23 +107,29 @@ function LoginSubmission() {
   })
 
   return (
-    <>
-      {status === 'resolved' ? (
-        <div>
-          Welcome <strong>{responseData?.username}</strong>
-        </div>
-      ) : (
-        <Login onSubmit={(data: FormData) => setFormData(data)} />
-      )}
-      <div style={{ height: 200 }}>
-        {status === 'pending' && <Spinner />}
-        {status === 'rejected' && (
-          <div role="alert" style={{ color: 'red' }}>
-            {errorMessage}
+    <div className=''>
+      <div className="mx-auto rounded-2xl space-y-6">
+        {status === 'resolved' ? (
+          <div className="text-green-600 text-lg font-semibold text-center">
+            Welcome <strong>{responseData?.username}</strong>
           </div>
+        ) : (
+          <Login onSubmit={(data: FormData) => setFormData(data)} />
         )}
+
+        <div className="h-48 flex items-center justify-center">
+          {status === 'pending' && <Spinner />}
+          {status === 'rejected' && (
+            <div
+              role="alert"
+              className="text-red-600 text-sm font-medium text-center"
+            >
+              {errorMessage}
+            </div>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
