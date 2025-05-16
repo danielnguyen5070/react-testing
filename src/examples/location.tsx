@@ -1,28 +1,47 @@
 import * as React from 'react'
-import {useCurrentPosition} from 'react-use-geolocation'
-import Spinner from '../components/spinner'
+import { useGeolocated } from "react-geolocated";
 
 function Location() {
-  const [position, error] = useCurrentPosition()
+const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+        useGeolocated({
+            positionOptions: {
+                enableHighAccuracy: false,
+            },
+            userDecisionTimeout: 5000,
+        });
 
-  if (!position && !error) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return (
-      <div role="alert" style={{color: 'red'}}>
-        {error.message}
-      </div>
-    )
-  }
-
-  return (
-    <div>
-      <p>Latitude: {position?.coords.latitude}</p>
-      <p>Longitude: {position?.coords.longitude}</p>
-    </div>
-  )
+    return !isGeolocationAvailable ? (
+        <div>Your browser does not support Geolocation</div>
+    ) : !isGeolocationEnabled ? (
+        <div>Geolocation is not enabled</div>
+    ) : coords ? (
+        <table>
+            <tbody>
+                <tr>
+                    <td>latitude</td>
+                    <td>{coords.latitude}</td>
+                </tr>
+                <tr>
+                    <td>longitude</td>
+                    <td>{coords.longitude}</td>
+                </tr>
+                <tr>
+                    <td>altitude</td>
+                    <td>{coords.altitude}</td>
+                </tr>
+                <tr>
+                    <td>heading</td>
+                    <td>{coords.heading}</td>
+                </tr>
+                <tr>
+                    <td>speed</td>
+                    <td>{coords.speed}</td>
+                </tr>
+            </tbody>
+        </table>
+    ) : (
+        <div>Getting the location data&hellip; </div>
+    );
 }
 
 export default Location

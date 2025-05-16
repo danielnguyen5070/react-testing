@@ -9,11 +9,7 @@ import { http, HttpResponse  } from 'msw';
 import { setupServer } from 'msw/node';
 
 import Login from '../../components/login-submission';
-
-type LoginData = {
-  username: string;
-  password: string;
-};
+import type { LoginData } from '../test/server-handlers';
 
 const buildLoginForm = build<LoginData>('LoginForm', {
   fields: {
