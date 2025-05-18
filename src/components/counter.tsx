@@ -8,7 +8,7 @@ function Counter() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 text-gray-800">
       <div className="text-6xl font-semibold mb-6 mt-12">
-        <span className="text-blue-600">{count}</span>
+        <span className="text-blue-600">Current count: {count}</span>
       </div>
       <div className="space-x-4">
         <button

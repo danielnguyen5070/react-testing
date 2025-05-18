@@ -1,18 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Counter from './components/counter';
+import Counter from './examples/counter';
+import CounterHook from './examples/counter-hook';
 import Sidebar from './components/Sidebar';
 import EasyButton from './examples/easy-button';
 import Location from './examples/location';
-import LoginSubmission from './components/login-submission';
-import Login from './components/login';
+import LoginSubmission from './examples/login-submission';
+import Login from './examples/login';
 
 const routes = [
-  { path: "/counter-hook", element: <Counter /> },
   { path: "/counter", element: <Counter /> },
+  { path: "/login", element: <Login onSubmit={() => { }} /> },
   { path: "/easy-button", element: <EasyButton /> },
   { path: "/location", element: <Location /> },
   { path: "/login-submission", element: <LoginSubmission /> },
-  { path: "/login", element: <Login onSubmit={() => { }} /> },
+  { path: "/counter-hook", element: <CounterHook /> },
 ];
 
 function App() {
