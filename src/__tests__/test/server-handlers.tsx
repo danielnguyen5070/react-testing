@@ -1,4 +1,4 @@
-import {http, HttpResponse} from 'msw'
+import { http, HttpResponse, delay } from 'msw'
 
 export type LoginData = {
   username: string;
@@ -8,12 +8,15 @@ export type LoginData = {
 const handlers = [
   http.post('https://auth-provider.example.com/api/login', async ({ request }) => {
     const body = await request.json() as LoginData;
-    if (!body.username) 
+
+    await delay(1000); // Add a 1-second delay before proceeding
+
+    if (!body.username)
       return HttpResponse.json({ message: 'username required' }, { status: 400 });
-    if (!body.password) 
+    if (!body.password)
       return HttpResponse.json({ message: 'password required' }, { status: 400 });
     return HttpResponse.json({ username: body.username });
   }),
 ];
 
-export {handlers}
+export { handlers }

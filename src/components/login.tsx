@@ -20,7 +20,7 @@ function Login({ onSubmit }: LoginFormProps) {
   }
 
   return (
-    <div className='min-h-screen bg-gray-100 text-gray-800 rounded'>
+    <div className='bg-gray-100 text-gray-800 rounded'>
       <form
         onSubmit={handleSubmit}
         className="space-y-6 max-w-lg mx-auto p-6"
@@ -36,7 +36,7 @@ function Login({ onSubmit }: LoginFormProps) {
             id="username-field"
             name="username"
             type="text"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="bg-white w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -51,7 +51,7 @@ function Login({ onSubmit }: LoginFormProps) {
             id="password-field"
             name="password"
             type="password"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="bg-white w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 

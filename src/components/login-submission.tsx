@@ -105,10 +105,9 @@ function LoginSubmission() {
     endpoint: 'https://auth-provider.example.com/api/login',
     data: formData,
   })
-
   return (
-    <div className=''>
-      <div className="mx-auto rounded-2xl space-y-6">
+    <div className='min-h-screen bg-gray-100 mx-auto rounded-2xl space-y-6'>
+      <div>
         {status === 'resolved' ? (
           <div className="text-green-600 text-lg font-semibold text-center">
             Welcome <strong>{responseData?.username}</strong>
