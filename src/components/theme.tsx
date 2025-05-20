@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { Theme } from './easy-button'
+export type Theme = 'light' | 'dark'
 
 const ThemeContext = React.createContext<
   [Theme, React.Dispatch<React.SetStateAction<Theme>>] | undefined
