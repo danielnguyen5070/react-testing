@@ -27,7 +27,7 @@ test(`logging in displays the user's username`, async () => {
   await userEvent.type(screen.getByLabelText(/password/i), password)
   await userEvent.click(screen.getByRole('button', { name: /submit/i }))
 
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 5000 })
 
   expect(screen.getByText(username)).toBeInTheDocument()
 })

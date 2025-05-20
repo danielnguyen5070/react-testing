@@ -38,24 +38,12 @@ function Location() {
         <div className="flex flex-col items-center min-h-screen bg-gray-100 text-gray-800 rounded">
             <div className="max-w-md min-w-sm mx-auto">
                 <h2 className="text-xl font-semibold mb-4 text-center mt-12">Your Location</h2>
-                <table className="w-full text-sm border-collapse">
-                    <tbody>
-                        <TableRow label="Latitude" value={coords.latitude} />
-                        <TableRow label="Longitude" value={coords.longitude} />
-                    </tbody>
-                </table>
+                <p>Latitude: {coords.latitude}</p>
+                <p>Longitude: {coords.longitude}</p>
             </div>
         </div>
     )
 }
 
-function TableRow({ label, value }: { label: string; value: string | number | null }) {
-    return (
-        <tr className="border-b border-gray-300 dark:border-gray-600">
-            <td className="py-2 font-medium">{label}</td>
-            <td className="py-2 text-right">{value}</td>
-        </tr>
-    )
-}
 
 export default Location

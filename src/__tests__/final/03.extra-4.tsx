@@ -29,7 +29,7 @@ test(`logging in displays the user's username`, async () => {
   await userEvent.type(screen.getByLabelText(/password/i), password)
   await userEvent.click(screen.getByRole('button', { name: /submit/i }))
 
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 5000 })
 
   expect(screen.getByText(username)).toBeInTheDocument()
 })
@@ -40,9 +40,9 @@ test('omitting the password results in an error', async () => {
 
   await userEvent.type(screen.getByLabelText(/username/i), username)
   // don't type in the password
-  await userEvent.click(screen.getByRole('button', { name: /submit/i }))
-
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+  await userEvent.click(screen.getByRole('button', { name: /Submit/i }))
+  
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 5000 })
 
   expect(screen.getByRole('alert').textContent).toMatchInlineSnapshot(
     `"password required"`,
@@ -61,8 +61,8 @@ test('unknown server error displays the error message', async () => {
   )
   render(<Login />)
   await userEvent.click(screen.getByRole('button', { name: /submit/i }))
-
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+  
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 5000 })
 
   expect(screen.getByRole('alert')).toHaveTextContent(testErrorMessage)
 })

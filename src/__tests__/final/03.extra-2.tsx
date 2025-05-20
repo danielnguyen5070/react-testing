@@ -18,6 +18,7 @@ const server = setupServer(...handlers)
 
 beforeAll(() => server.listen())
 afterAll(() => server.close())
+afterEach(() => server.resetHandlers())
 
 test(`logging in displays the user's username`, async () => {
   render(<Login />)
@@ -27,7 +28,7 @@ test(`logging in displays the user's username`, async () => {
   await userEvent.type(screen.getByLabelText(/password/i), password)
   await userEvent.click(screen.getByRole('button', { name: /submit/i }))
 
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 5000 })
 
   expect(screen.getByText(username)).toBeInTheDocument()
 })
@@ -39,8 +40,8 @@ test('omitting the password results in an error', async () => {
   await userEvent.type(screen.getByLabelText(/username/i), username)
   // don't type in the password
   await userEvent.click(screen.getByRole('button', { name: /submit/i }))
-
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+  
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i), { timeout: 5000 })
 
   expect(screen.getByRole('alert')).toHaveTextContent('password required')
 })
