@@ -1,26 +1,39 @@
-// import * as React from 'react'
-// import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
-// import userEvent from '@testing-library/user-event'
-// import { build, fake } from '@jackfranklin/test-data-bot'
-// import { setupServer } from 'msw/node'
-// import { handlers } from '../test/server-handlers'
-// import Login from '../../components/login-submission'
-// import type { LoginData } from '../test/server-handlers'
+import Counter from '../../examples/counter-hook';
+import { render, fireEvent } from '@testing-library/react';
 
-// Setup form
+test('1: counter increments and decrements when the buttons are clicked', () => {
+    const { container } = render(<Counter />);
 
-// Setup server
+    const message = container.querySelector('span');
+    if (!message) throw new Error('Message element not found');
 
-test(`logging in displays the user's username`, async () => {
-    // 🐨 build realistic fake login data using test-data-bot
-    // 🐨 render the <Login /> component
+    const [decrementButton, incrementButton] = container.querySelectorAll('button');
 
-    // 🐨 type the fake username into the username input
-    // 🐨 type the fake password into the password input
+    expect(message).toHaveTextContent('Current count: 0');
 
-    // 🐨 click the submit button
+    fireEvent.click(incrementButton);
+    expect(message).toHaveTextContent('Current count: 1');
 
-    // 🐨 wait for the loading spinner to be removed
+    fireEvent.click(incrementButton);
+    expect(message).toHaveTextContent('Current count: 2');
 
-    // 🧪 assert that the screen shows the logged-in username
-})
+    fireEvent.click(decrementButton);
+    expect(message).toHaveTextContent('Current count: 1');
+});
+
+test('2: counter increments when the buttons are clicked twice', () => {
+    const { container } = render(<Counter />);
+
+    const message = container.querySelector('span');
+    if (!message) throw new Error('Message element not found');
+
+    const [, incrementButton] = container.querySelectorAll('button');
+
+    expect(message).toHaveTextContent('Current count: 0');
+
+    fireEvent.click(incrementButton);
+    expect(message).toHaveTextContent('Current count: 1');
+
+    fireEvent.click(incrementButton);
+    expect(message).toHaveTextContent('Current count: 2');
+});

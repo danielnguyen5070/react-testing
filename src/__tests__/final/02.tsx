@@ -2,12 +2,12 @@ import Counter from '../../examples/counter-hook';
 import { render, fireEvent } from '@testing-library/react';
 
 test('1: counter increments and decrements when the buttons are clicked', () => {
-  render(<Counter />);
+  const { container } = render(<Counter />);
 
-  const message = document.body.querySelector('span');
+  const message = container.querySelector('span');
   if (!message) throw new Error('Message element not found');
 
-  const [decrementButton, incrementButton] = document.body.querySelectorAll('button');
+  const [decrementButton, incrementButton] = container.querySelectorAll('button');
 
   expect(message).toHaveTextContent('Current count: 0');
 
@@ -22,12 +22,12 @@ test('1: counter increments and decrements when the buttons are clicked', () => 
 });
 
 test('2: counter increments when the buttons are clicked twice', () => {
-  render(<Counter />);
+  const { container } = render(<Counter />);
 
-  const message = document.body.querySelector('span');
+  const message = container.querySelector('span');
   if (!message) throw new Error('Message element not found');
 
-  const [, incrementButton] = document.body.querySelectorAll('button');
+  const [, incrementButton] = container.querySelectorAll('button');
 
   expect(message).toHaveTextContent('Current count: 0');
 
