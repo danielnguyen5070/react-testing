@@ -1,15 +1,9 @@
-// import * as React from 'react'
-// import { render, screen, fireEvent } from '@testing-library/react'
-// import Counter from '../../components/counter'
+// import { createRoot } from 'react-dom/client';
+// import { flushSync } from 'react-dom'
+// import Counter from '../../examples/counter-hook';
 
-test('counter increments and decrements when the buttons are clicked', () => {
-  // 🐨 render the Counter component
-  // 🐨 get the increment and decrement buttons by their accessible role and name
-  // 🐨 get the message that displays the current count
+test('1: counter increments and decrements when the buttons are clicked', () => {
+});
 
-  // 🧪 assert the initial count is 0
-
-  // 🧪 simulate a click on the increment button and check count is 1
-
-  // 🧪 simulate a click on the decrement button and check count is back to 0
-})
+test('2: counter increments when the buttons are clicked twice', () => {
+});
