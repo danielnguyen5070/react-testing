@@ -19,7 +19,7 @@ test('1: counter increments and decrements when the buttons are clicked', () => 
   if (!message) throw new Error('Message element not found');
 
   const [decrementButton, incrementButton] = document.body.querySelectorAll('button');
-  const clickEvent = new MouseEvent('click', {
+  const incrementClickEvent = new MouseEvent('click', {
     bubbles: true,
     cancelable: true,
     button: 0
@@ -27,13 +27,18 @@ test('1: counter increments and decrements when the buttons are clicked', () => 
 
   expect(message.textContent).toBe('Current count: 0');
 
-  flushSync(() => incrementButton.dispatchEvent(clickEvent));
+  flushSync(() => incrementButton.dispatchEvent(incrementClickEvent));
   expect(message.textContent).toBe('Current count: 1');
 
-  flushSync(() => incrementButton.dispatchEvent(clickEvent));
+  flushSync(() => incrementButton.dispatchEvent(incrementClickEvent));
   expect(message.textContent).toBe('Current count: 2');
 
-  flushSync(() => decrementButton.dispatchEvent(clickEvent));
+  const decrementClickEvent = new MouseEvent('click', {
+    bubbles: true,
+    cancelable: true,
+    button: 0
+  });
+  flushSync(() => decrementButton.dispatchEvent(decrementClickEvent));
   expect(message.textContent).toBe('Current count: 1');
 });
 
