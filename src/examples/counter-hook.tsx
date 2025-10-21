@@ -1,6 +1,4 @@
 // http://localhost:3000/counter-hook
-
-import * as React from 'react'
 import useCounter from '../components/use-counter'
 
 function Counter() {

@@ -9,7 +9,7 @@ import Login from './examples/login';
 
 const routes = [
   { path: "/counter", element: <Counter /> },
-  { path: "/login", element: <Login onSubmit={() => { }} /> },
+  { path: "/login", element: <Login /> },
   { path: "/easy-button", element: <EasyButton /> },
   { path: "/location", element: <Location /> },
   { path: "/login-submission", element: <LoginSubmission /> },
@@ -21,7 +21,7 @@ function App() {
     <Router>
       <div className="flex">
         <Sidebar />
-        <main className="ml-64 p-6 flex-1">
+        <main className="ml-64 flex-1">
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.element} />
