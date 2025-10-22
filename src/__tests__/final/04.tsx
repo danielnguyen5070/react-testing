@@ -1,42 +1,43 @@
-// import * as React from 'react'
-// import { render, screen } from '@testing-library/react'
-// import { vi, type Mock } from 'vitest'
-// import { useGeolocated } from 'react-geolocated'
-// import Location from '../../examples/location'
 
-// ✅ Mock the module using Vitest
-// vi.mock('react-geolocated', () => {
-//     return {
-//         useGeolocated: vi.fn(),
-//     }
-// })
+import { render, screen } from '@testing-library/react'
+import Login from '../../components/login'
+import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
+import { faker } from '@faker-js/faker'
 
-// type GeolocationReturn = {
-//     coords: {
-//         latitude: number
-//         longitude: number
-//     } | null
-//     isGeolocationAvailable: boolean
-//     isGeolocationEnabled: boolean
-// }
+type LoginForm = {
+    username?: string
+    password?: string
+}
 
-describe('<Location />', () => {
-    // const setupMock = (mockValues: Partial<GeolocationReturn>) => {
-    //     ((useGeolocated as unknown) as Mock).mockReturnValue({
-    //         coords: null,
-    //         isGeolocationAvailable: true,
-    //         isGeolocationEnabled: true,
-    //         ...mockValues,
-    //     })
-    // }
+const buildLoginForm = (props?: LoginForm) => {
+    return {
+        username: faker.internet.username(),
+        password: faker.internet.password(),
+        ...props
+    }
+}
 
-    test('shows latitude and longitude when coordinates are available', () => {
-        // 🐨 set up the mock geolocation hook to return specific coordinates
+test('submitting the form calls onSubmit with username and password', async () => {
+    const handleSubmit = vi.fn()
+    render(<Login onSubmit={handleSubmit} />)
 
-        // 🐨 render the Location component
-
-        // 🧪 assert that the latitude is displayed correctly
-
-        // 🧪 assert that the longitude is displayed correctly
+    const username = screen.getByRole('textbox', {
+        name: /username/i
     })
+    const password = screen.getByLabelText(/password/i)
+    const submitButton = screen.getByRole('button', {
+        name: /submit/i
+    })
+
+    const { username: user, password: pass } = buildLoginForm({ username: 'my-username', password: 'my-password' })
+    await userEvent.type(username, user)
+    await userEvent.type(password, pass)
+    await userEvent.click(submitButton)
+
+    expect(handleSubmit).toHaveBeenCalledWith({
+        username: user,
+        password: pass
+    })
+    expect(handleSubmit).toHaveBeenCalledTimes(1)
 })
