@@ -3,20 +3,19 @@ import { render, screen } from '@testing-library/react'
 import Login from '../../components/login'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
-import { faker } from '@faker-js/faker'
+import { build, fake } from '@jackfranklin/test-data-bot'
 
 type LoginForm = {
-    username?: string
-    password?: string
+    username: string
+    password: string
 }
 
-const buildLoginForm = (props?: LoginForm) => {
-    return {
-        username: faker.internet.username(),
-        password: faker.internet.password(),
-        ...props
+const buildLoginForm = build<LoginForm>('LoginForm', {
+    fields: {
+        username: fake(f => f.internet.userName()),
+        password: fake(f => f.internet.password())
     }
-}
+})
 
 test('submitting the form calls onSubmit with username and password', async () => {
     const handleSubmit = vi.fn()
@@ -30,7 +29,7 @@ test('submitting the form calls onSubmit with username and password', async () =
         name: /submit/i
     })
 
-    const { username: user, password: pass } = buildLoginForm({ username: 'my-username', password: 'my-password' })
+    const { username: user, password: pass } = buildLoginForm()
     await userEvent.type(username, user)
     await userEvent.type(password, pass)
     await userEvent.click(submitButton)
