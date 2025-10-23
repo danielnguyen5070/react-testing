@@ -1,8 +1,8 @@
-import * as React from 'react'
 import { useGeolocated } from 'react-geolocated'
+import Spinner from '../components/spinner'
 
 function Location() {
-    const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    const { coords } =
         useGeolocated({
             positionOptions: {
                 enableHighAccuracy: false,
@@ -10,28 +10,8 @@ function Location() {
             userDecisionTimeout: 5000,
         })
 
-    if (!isGeolocationAvailable) {
-        return (
-            <div className="text-red-600 text-center p-4">
-                Your browser does not support Geolocation
-            </div>
-        )
-    }
-
-    if (!isGeolocationEnabled) {
-        return (
-            <div className="text-yellow-600 text-center p-4">
-                Geolocation is not enabled
-            </div>
-        )
-    }
-
     if (!coords) {
-        return (
-            <div className="text-blue-600 text-center p-4">
-                Getting the location data&hellip;
-            </div>
-        )
+        return <Spinner />
     }
 
     return (
