@@ -10,8 +10,6 @@ beforeAll(() => {
     };
 })
 
-vi.mock('react-geolocated')
-
 afterEach(() => {
     vi.clearAllMocks();
 });
