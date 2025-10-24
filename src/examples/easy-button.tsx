@@ -1,4 +1,3 @@
-import * as React from 'react'
 import EasyButton from '../components/easy-button'
 import { ThemeProvider, useTheme } from '../components/theme'
 
